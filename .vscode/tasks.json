@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ESP-IDF: Build, Flash & Monitor (Default)",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/c",
+                "${workspaceFolder}\\Flash_And_Run_ESP32.bat"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ESP-IDF: Flash Firmware Only",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "-m",
+                "esptool",
+                "--chip",
+                "esp32",
+                "--baud",
+                "921600",
+                "write_flash",
+                "0x0",
+                "${workspaceFolder}\\smart_home_automation_merged.bin"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ESP-IDF: Open Serial Monitor",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "-m",
+                "serial.tools.miniterm",
+                "--raw",
+                "auto",
+                "115200"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

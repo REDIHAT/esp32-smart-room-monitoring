@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Smart Room Monitoring & Gas Detection — Web Flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --ok: #22c55e;
+      --warn: #eab308;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    .container {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p.subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .flasher-box {
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    esp-web-install-button {
+      --esp-tools-button-border-radius: 10px;
+      --esp-tools-button-color: #0f172a;
+      --esp-tools-button-text-color: #ffffff;
+      --esp-tools-button-font-size: 1.1rem;
+      --esp-tools-button-padding: 0.85rem 2rem;
+    }
+    .instructions {
+      text-align: left;
+      width: 100%;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .instructions ol {
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .table-card {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+    .table-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    th, td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">ESP Web Tools • Chrome & Edge Ready</span>
+      <h1>ESP32 Smart Room Monitoring</h1>
+      <p class="subtitle">Flash precompiled ESP-IDF 4.4.7 firmware directly from your browser without installing any tools.</p>
+    </header>
+
+    <div class="card">
+      <div class="flasher-box">
+        <esp-web-install-button manifest="manifest.json">
+          <button slot="activate" style="background:#0284c7;color:#fff;border:none;padding:0.9rem 2rem;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(2,132,199,0.4);">
+            ⚡ Connect & Install Firmware
+          </button>
+          <span slot="unsupported">⚠️ Web Serial is not supported in this browser. Please open this page in Google Chrome, Microsoft Edge, or Opera on Windows, Mac, or Linux.</span>
+          <span slot="not-allowed">⚠️ Web Serial is only supported over HTTPS or localhost.</span>
+        </esp-web-install-button>
+        <span style="font-size:0.8rem;color:var(--muted);">Offset: 0x0 • Single 4MB Merged Image</span>
+      </div>
+
+      <div class="instructions">
+        <strong>📋 Quick Flashing Steps:</strong>
+        <ol>
+          <li>Plug your <strong>ESP32 DevKit V1</strong> into your computer via a USB data cable.</li>
+          <li>Click the blue <strong>"Connect & Install Firmware"</strong> button above.</li>
+          <li>Select your ESP32's serial port (e.g. <code>CP2102</code> or <code>CH340</code>) and click <strong>Connect</strong>.</li>
+          <li>Click <strong>Install ESP32 Smart Room Monitoring</strong> and confirm.</li>
+          <li>Wait for the progress bar to reach 100%. Once done, press the <strong>EN / RST</strong> button on the ESP32!</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h3>🔌 Hardware Wiring Reference</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Pin</th>
+            <th>ESP32 Pin</th>
+            <th>Connection Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>DHT11</strong></td>
+            <td>VCC</td>
+            <td><strong>3V3</strong></td>
+            <td>3.3V Power</td>
+          </tr>
+          <tr>
+            <td><strong>DHT11</strong></td>
+            <td>DATA</td>
+            <td><strong>D4 (GPIO 4)</strong></td>
+            <td>1-Wire bidirectional data</td>
+          </tr>
+          <tr>
+            <td><strong>DHT11</strong></td>
+            <td>GND</td>
+            <td><strong>GND</strong></td>
+            <td>Common ground</td>
+          </tr>
+          <tr>
+            <td><strong>MQ-2</strong></td>
+            <td>VCC</td>
+            <td><strong>VIN (5V)</strong></td>
+            <td>Heater coil requires 5V</td>
+          </tr>
+          <tr>
+            <td><strong>MQ-2</strong></td>
+            <td>GND</td>
+            <td><strong>GND</strong></td>
+            <td>Common ground</td>
+          </tr>
+          <tr>
+            <td><strong>MQ-2</strong></td>
+            <td>AO</td>
+            <td><strong>D34 (GPIO 34)</strong></td>
+            <td>Via 22kΩ + 10kΩ voltage divider (safe max 1.56V)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      Maintained by <a href="https://github.com/REDIHAT" target="_blank">@REDIHAT</a> • Built with ESP-IDF & ESP Web Tools
+    </footer>
+  </div>
+</body>
+</html>

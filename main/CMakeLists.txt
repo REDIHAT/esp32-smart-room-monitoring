@@ -1,0 +1,17 @@
+idf_component_register(
+    SRCS 
+        "dht11.c"
+        "mq2.c"
+        "main.c"
+    INCLUDE_DIRS 
+        "."
+    REQUIRES 
+        nvs_flash 
+        esp_wifi 
+        esp_event 
+        esp_netif 
+        esp_http_server 
+        esp_http_client 
+        driver 
+        esp_adc_cal
+)

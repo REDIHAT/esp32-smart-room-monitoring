@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "ESP32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/main/**",
+                "C:/Users/surya rapeti/AppData/Local/Arduino15/packages/esp32/hardware/esp32/2.0.17/tools/sdk/esp32/include/**"
+            ],
+            "defines": [
+                "ESP32",
+                "ESP_PLATFORM"
+            ],
+            "compilerPath": "C:/Users/surya rapeti/AppData/Local/Arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/bin/xtensa-esp32-elf-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

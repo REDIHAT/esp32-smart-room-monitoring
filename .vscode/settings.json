@@ -1,0 +1,9 @@
+{
+    "idf.flashType": "UART",
+    "idf.port": "COM3",
+    "idf.target": "esp32",
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c"
+    }
+}

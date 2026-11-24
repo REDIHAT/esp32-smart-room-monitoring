@@ -1,0 +1,16 @@
+{
+  "name": "ESP32 Smart Room Monitoring & Gas Detection",
+  "version": "1.0.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "smart_home_monitoring_merged_0x0.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
